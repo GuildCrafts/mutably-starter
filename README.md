@@ -7,6 +7,9 @@ For goal #383
 
 # CRUD Mutably
 
+Team name: #befitting-penguin  
+Team: Jeffrey Ware, Jay Cribas  
+
 ## Challenge Rating
 
 This goal will likely be within your ZPD if you...
