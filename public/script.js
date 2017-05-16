@@ -12,7 +12,7 @@ $(document).ready(function(){
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
-      url: 'http://mutably.herokuapp.com/pokemon'+id,
+      url: 'http://mutably.herokuapp.com/pokemon/',
       success: newPokeDataResponse
     })
   })
@@ -61,8 +61,8 @@ function catchEmAll () {
       $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
       +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Edit</button>'
       +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
-      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].title+'</span>'
-      +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].title+'"/></span>'
+      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'</span>'
+      +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
       +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
     }
