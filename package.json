@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "start:dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,8 +14,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "nodemon": "^1.11.0"
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
