@@ -1,1 +1,84 @@
 /*Custom styles here*/
+.jumbotron {
+  background-image: url('/images/c45e331b0f6be2fd15942b0c3b4071cc.jpg');
+  background-size: 100% auto;
+  background-position: center;
+  color: white;
+  text-shadow: 2px 2px 9px #000000;
+}
+
+.edit-form {
+  display: none;
+}
+
+.save-btn {
+  display: none;
+  position: absolute;
+  margin-top: 20px;
+  bottom: 40px;
+  border: 0px;
+}
+
+h3 {
+  color: white;
+  text-shadow: 2px 2px 9px #000000;
+}
+
+input {
+  font-family: 'Shadows Into Light', cursive;
+  letter-spacing: .1em;
+}
+
+.shadows {
+  font-family: 'Shadows Into Light', cursive;
+  letter-spacing: .1em;
+}
+span {
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  height: 60px;
+  margin-top: 70px;
+}
+
+
+
+.center-name {
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail {
+  height: 450px;
+}
+
+.edit-btn {
+  position: absolute;
+  margin-top: 20px;
+  bottom: 40px;
+  background-color: black;
+  border: 0px;
+}
+
+.edit-btn:hover {
+  background-color: #1f1f1f;
+}
+
+.delete-btn {
+  margin-left: 50px;
+  position: absolute;
+  margin-top: 20px;
+  bottom: 40px;
+  border: 0px;
+}
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .caption {
+      position: absolute;
+      padding-bottom: 20px;
+    }
+}
