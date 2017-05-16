@@ -1,11 +1,8 @@
-# Mutably Starter Project
-For goal #383
+# CRUD Mutably #383
 
 ## To get this project running
 1. `npm install`
 1. `npm start` to run (uses nodemon)
-
-# CRUD Mutably
 
 Team name: #befitting-penguin  
 Team: Jeffrey Ware, Jay Cribas  
