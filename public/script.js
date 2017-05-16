@@ -12,7 +12,7 @@ $(document).ready(function(){
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
-      url: 'http://mutably.herokuapp.com/albums/',
+      url: 'https://mutably.herokuapp.com/albums/',
       data: newAlbumData,
       success: handleAlbumAddResponse
     })
@@ -23,7 +23,7 @@ $(document).ready(function(){
     var id = $(this).data('id')
     $.ajax({
       method: 'DELETE',
-      url: 'http://mutably.herokuapp.com/albums/'+id,
+      url: 'https://mutably.herokuapp.com/albums/'+id,
       success: handleAlbumDeleteResponse
     })
   })
@@ -48,7 +48,7 @@ $(document).ready(function(){
     var updatedname = $('.input-'+id+' input').val()
     $.ajax({
       method: 'PUT',
-      url: 'http://mutably.herokuapp.com/albums/'+id,
+      url: 'https://mutably.herokuapp.com/albums/'+id,
       data: {name: updatedname},
       success: handleAlbumUpdateResponse
     })
@@ -59,7 +59,7 @@ function getAllalbums() {
   $('.row').html('')
   $.ajax({
     method: 'GET',
-    url: 'http://mutably.herokuapp.com/albums'
+    url: 'https://mutably.herokuapp.com/albums'
   }).done(function(data) {
     for (var i=0; i<data.albums.length; i++) {
       $('.row').append('<div class="col-sm-4 col-md-2-'+data.albums[i]._id+'">'
