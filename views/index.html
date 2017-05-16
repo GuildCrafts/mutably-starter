@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mutably front-end</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Personal pokedex</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="/script.js"></script>
   </head>
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
       <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="/">Mutably Front-end</a>
+        <a class="navbar-brand" href="/">Welcome to Your Computer</a>
       </nav>
-      <div class="panel panel-default">
-        <div class="panel-heading">[Your Chosen Resource]</div>
-        <ul class="list-group">
-          <!-- your resource items here -->
-        </ul>
-      </div>
+      <form class="form-inline well" id="new-pokemon-entry">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="PokeName">
+        </div>
+        <div class="form-group">
+          <label for="number">No. ?</label>
+          <input type="text" class="form-control" name="number" id="number" placeholder="PokeNumber">
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">Pokemon!</div>
+            <ul class="list-group">
+              <!-- put stuff here -->
+            </ul>
+        </div>
     </div>
   </body>
 </html>

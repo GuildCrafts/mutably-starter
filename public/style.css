@@ -1,1 +1,8 @@
 /*Custom styles here*/
+.edit-form {
+  display: none;
+}
+
+.save-btn {
+  display: none;
+}
