@@ -42,7 +42,6 @@ $(document).ready(function(){
   // $pokemon has been caught!
   $(document).on('click', '.save-btn', function () {
     var id = $(this).data('id')
-    console.log(id + "im trying");
     var caughtPokemon = $('.input-'+id+' input').val()
     //grab all the existing data on current pokemon
     $.ajax({
@@ -52,7 +51,7 @@ $(document).ready(function(){
       var dexNum = data.pokedex
       var evolved = data.evolves_from
       var visual = data.image
-      console.log(dexNum)
+      // send old static data, + new name along
       $.ajax({
         method: 'PUT',
         url: 'http://mutably.herokuapp.com/pokemon/'+id,
@@ -60,8 +59,6 @@ $(document).ready(function(){
         success: catchPokeDataResponse
       })
     })
-    //set some vars to be used by the put method for static data
-
   })
 });
 
@@ -102,7 +99,7 @@ function catchPokeDataResponse(data) {
   var id = data._id;
 
   // nickname the pokemon
-  $('.name-'+id).html('&nbsp;'+data.name)
+  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
 
   $('.name-'+id).show()
   $('.input-'+id).hide()
