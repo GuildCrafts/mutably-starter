@@ -2,6 +2,107 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
-  // code in here
+  // collect every pokemon we know
+  catchEmAll();
 
+  $('#new-pokemon-entry').on('submit', function(event) {
+    event.preventDefault()
+    var newPokeData = $(this).serialize()
+    console.log("I did a thing");
+    console.log(newPokeData);
+    $(this).trigger("reset");
+    $.ajax({
+      method: 'POST',
+      url: 'http://mutably.herokuapp.com/pokemon/',
+      data: newPokeData,
+      success: newPokeDataResponse
+    })
+  })
+
+  // release pokemon
+  $(document).on('click', '.delete-btn', function () {
+    var id = $(this).data('id')
+    $.ajax({
+      method: 'DELETE',
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      success: releasePokeDataResponse
+    })
+  })
+
+  $(document).on('click', '.edit-btn', function () {
+    var id = $(this).data('id')
+
+    $('.name-'+id).hide()
+    $('.input-'+id).show()
+
+    $('.edit-'+id).hide()
+    $('.save-'+id).show()
+  })
+
+  // $pokemon has been caught!
+  $(document).on('click', '.save-btn', function () {
+    var id = $(this).data('id')
+    var caughtPokemon = $('.input-'+id+' input').val()
+    //grab all the existing data on current pokemon
+    $.ajax({
+      method: 'GET',
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+    }).done(function(data){
+      var dexNum = data.pokedex
+      var evolved = data.evolves_from
+      var visual = data.image
+      // send old static data, + new name along
+      $.ajax({
+        method: 'PUT',
+        url: 'http://mutably.herokuapp.com/pokemon/'+id,
+        data: {name: caughtPokemon, pokedex: dexNum, evolves_from: evolved, image: visual},
+        success: catchPokeDataResponse
+      })
+    })
+  })
 });
+
+function catchEmAll () {
+  $('.list-group').html('')
+  $.ajax({
+    method: 'GET',
+    url: 'http://mutably.herokuapp.com/pokemon'
+  }).done(function(data) {
+    for (var i = 0; i < data.pokemon.length; i++) {
+      $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
+      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Edit</button>'
+      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
+      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'</span>'
+      +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
+      +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
+      +'</li>')
+      $('.save-'+data.pokemon[i]._id).hide();
+    }
+  })
+}
+
+function newPokeDataResponse(data) {
+  console.log(data);
+  // rerun with all the new data, no full page refresh
+  catchEmAll();
+}
+
+function releasePokeDataResponse (data) {
+  console.log('releasePokeDataResponse got ', data);
+  var pokeId = data._id;
+  var $row = $('.item-' + pokeId);
+  // "release" the pokemon on that row
+  $row.remove();
+}
+
+function catchPokeDataResponse(data) {
+  var id = data._id;
+
+  // nickname the pokemon
+  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
+
+  $('.name-'+id).show()
+  $('.input-'+id).hide()
+  $('.edit-'+id).show()
+  $('.save-'+id).hide()
+}
