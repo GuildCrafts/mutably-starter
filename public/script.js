@@ -37,19 +37,31 @@ $(document).ready(function(){
 
     $('.edit-'+id).hide()
     $('.save-'+id).show()
-    console.log("Im workinghere")
   })
 
   // $pokemon has been caught!
   $(document).on('click', '.save-btn', function () {
     var id = $(this).data('id')
+    console.log(id + "im trying");
     var caughtPokemon = $('.input-'+id+' input').val()
+    //grab all the existing data on current pokemon
     $.ajax({
-      method: 'PUT',
+      method: 'GET',
       url: 'http://mutably.herokuapp.com/pokemon/'+id,
-      data: {name: caughtPokemon},
-      success: catchPokeDataResponse
+    }).done(function(data){
+      var dexNum = data.pokedex
+      var evolved = data.evolves_from
+      var visual = data.image
+      console.log(dexNum)
+      $.ajax({
+        method: 'PUT',
+        url: 'http://mutably.herokuapp.com/pokemon/'+id,
+        data: {name: caughtPokemon, pokedex: dexNum, evolves_from: evolved, image: visual},
+        success: catchPokeDataResponse
+      })
     })
+    //set some vars to be used by the put method for static data
+
   })
 });
 
@@ -63,11 +75,10 @@ function catchEmAll () {
       $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
       +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Edit</button>'
       +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
-      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'</span>'
+      +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'</span>'
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
       +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
-      console.log(data.pokemon);
       $('.save-'+data.pokemon[i]._id).hide();
     }
   })
