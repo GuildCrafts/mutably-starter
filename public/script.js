@@ -67,6 +67,8 @@ function catchEmAll () {
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
       +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
+      console.log(data.pokemon);
+      $('.save-'+data.pokemon[i]._id).hide();
     }
   })
 }
