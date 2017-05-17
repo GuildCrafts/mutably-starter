@@ -14,6 +14,7 @@ $(document).ready(function(){
     $.ajax({
       method: 'POST',
       url: 'http://mutably.herokuapp.com/pokemon/',
+      data: newPokeData,
       success: newPokeDataResponse
     })
   })
@@ -23,7 +24,7 @@ $(document).ready(function(){
     var id = $(this).data('id')
     $.ajax({
       method: 'DELETE',
-      url: 'http://mutably.herokuapp.com/pokemon'+id,
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
       success: releasePokeDataResponse
     })
   })
@@ -34,19 +35,19 @@ $(document).ready(function(){
     $('.name-'+id).hide()
     $('.input-'+id).show()
 
-    $('edit-'+id).hide()
-    $('save-'+id).show()
-
+    $('.edit-'+id).hide()
+    $('.save-'+id).show()
+    console.log("Im workinghere")
   })
 
   // $pokemon has been caught!
   $(document).on('click', '.save-btn', function () {
     var id = $(this).data('id')
-
     var caughtPokemon = $('.input-'+id+' input').val()
     $.ajax({
       method: 'PUT',
-      url: 'http://mutably.herokuapp.com/pokemon'+id,
+      url: 'http://mutably.herokuapp.com/pokemon/'+id,
+      data: {name: caughtPokemon},
       success: catchPokeDataResponse
     })
   })
