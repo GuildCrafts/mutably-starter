@@ -8,6 +8,7 @@ $(document).ready(function(){
   $('#new-pokemon-entry').on('submit', function(event) {
     event.preventDefault()
     var newPokeData = $(this).serialize()
+    console.log("I did a thing");
     console.log(newPokeData);
     $(this).trigger("reset");
     $.ajax({
