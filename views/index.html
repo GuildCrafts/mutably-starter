@@ -2,15 +2,18 @@
 <html>
   <head>
     <title>Personal pokedex</title>
+    <link rel="shortcut icon" type="image/png" href="https://www.capturepokemon.net/pokemon/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="/script.js"></script>
   </head>
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
       <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="/">Welcome to Your Computer</a>
+        <a class="navbar-brand" href="/"><h2>Welcome to Your Computer</h2></a>
       </nav>
       <form class="form-inline well" id="new-pokemon-entry">
         <div class="form-group">
@@ -21,10 +24,14 @@
           <label for="pokedex">No. ?</label>
           <input type="text" class="form-control" name="pokedex" id="pokedex" placeholder="PokeNumber">
         </div>
-        <button type="submit" class="btn btn-default add-btn">Scan Pokemon</button>
+        <button type="submit" class="btn waves-effect waves-light indigo" name="action">Scan Pokemon
+          <i class="material-icons right">input</i>
+        </button>
       </form>
         <div class="panel panel-default">
-          <div class="panel-heading">Pokemon!</div>
+          <div class="panel-heading">
+            <h3 class="center">Your Pokemon!</h3>
+          </div>
             <ul class="list-group">
               <!-- put stuff here -->
             </ul>

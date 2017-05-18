@@ -32,6 +32,7 @@ $(document).ready(function(){
   $(document).on('click', '.edit-btn', function () {
     var id = $(this).data('id')
 
+    $('.btn-danger').hide()
     $('.name-'+id).hide()
     $('.input-'+id).show()
 
@@ -74,7 +75,7 @@ function catchEmAll () {
       +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
       +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'</span>'
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
-      +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.pokemon[i]._id+'">Delete</button>'
+      +'<button class="btn btn-danger delete-btn right red" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
       $('.save-'+data.pokemon[i]._id).hide();
     }
@@ -100,7 +101,7 @@ function catchPokeDataResponse(data) {
 
   // nickname the pokemon
   $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
-
+  $('.btn-danger').show()
   $('.name-'+id).show()
   $('.input-'+id).hide()
   $('.edit-'+id).show()
