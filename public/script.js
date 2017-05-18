@@ -100,7 +100,7 @@ function catchPokeDataResponse(data) {
   var id = data._id;
 
   // nickname the pokemon
-  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
+  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex+'&nbsp'+data.evolves_from+'&nbsp'+data.image)
   $('.btn-danger').show()
   $('.name-'+id).show()
   $('.input-'+id).hide()
