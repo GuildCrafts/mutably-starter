@@ -1,1 +1,14 @@
 /*Custom styles here*/
+.edit-form {
+  display: none;
+}
+
+.save-btn {
+  display: none;
+}
+
+li {
+  border-color: black;
+  border-style: solid;
+  border-width: thin;
+}
