@@ -32,6 +32,7 @@ $(document).ready(function(){
   $(document).on('click', '.edit-btn', function () {
     var id = $(this).data('id')
 
+    $('.btn-danger').hide()
     $('.name-'+id).hide()
     $('.input-'+id).show()
 
@@ -100,7 +101,7 @@ function catchPokeDataResponse(data) {
 
   // nickname the pokemon
   $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
-
+  $('.btn-danger').show()
   $('.name-'+id).show()
   $('.input-'+id).hide()
   $('.edit-'+id).show()

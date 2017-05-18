@@ -6,3 +6,9 @@
 .save-btn {
   display: none;
 }
+
+li {
+  border-color: black;
+  border-style: solid;
+  border-width: thin;
+}
