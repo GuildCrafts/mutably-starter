@@ -63,9 +63,9 @@ function getAllalbums() {
   }).done(function(data) {
     for (var i=0; i<data.albums.length; i++) {
       $('.row').append('<div class="col-sm-4 col-md-2-'+data.albums[i]._id+'">'
-      +'<div class="thumbnail"><h3><span class="center-name name-'+data.albums[i]._id+'">&nbsp;'+data.albums[i].name+'</span></h3>'
+      +'<div class="thumbnail"><h3><span class="center-name name-'+data.albums[i]._id+'">'+data.albums[i].name+'</span></h3>'
       +'<span class="form-inline edit-form input-'+data.albums[i]._id+'">&nbsp;<input class="form-control" value="'+data.albums[i].name+'"/></span>'
-      +'<img src="https://f4.bcbits.com/img/0001215340_10.jpg" alt="..."><div class="caption"><h4>'+data.albums[i].artistName+'</h4><p class="shadows">'+data.albums[i].genres+'</p></div>'
+      +'<img src="https://f4.bcbits.com/img/0001215340_10.jpg" alt="..."><div class="caption"><h6>'+data.albums[i].releaseDate+'</p><h4>'+data.albums[i].artistName+'</h4><p class="shadows">'+data.albums[i].genres+'</h6></div>'
       +'<button class="btn btn-primary edit-btn edit-'+data.albums[i]._id+'" data-id="'+data.albums[i]._id+'">Edit</button>'
       +'<button class="btn btn-success save-btn save-'+data.albums[i]._id+'" data-id="'+data.albums[i]._id+'">Save</button>'
       +'<button class="btn btn-danger delete-btn pull-right" data-id="'+data.albums[i]._id+'">Delete</button>')
