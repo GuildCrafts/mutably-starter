@@ -14,7 +14,17 @@
   color: white;
   text-shadow: 2px 2px 9px #000000;
 }
-
+.buttonDiv{
+display:inline-block;
+padding-left: 30px;
+}
+.addAlbum{
+ border-radius: 7px;
+ width:120px;
+ height: 30px;
+ color:white;
+ border:none;
+}
 .edit-form {
   display: none;
 }
@@ -73,7 +83,7 @@ span {
 }
 
 .thumbnail {
-  height: 450px;
+  height: 500px;
 }
 
 .edit-btn {

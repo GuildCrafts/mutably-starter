@@ -14,7 +14,7 @@
       <h1>GOOD MUSIC</h1>
       <p class='shadows'>You only need 6 albums to win.</p>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
       <form class="form-inline well" id="new-album-form">
         <div class="form-group">
           <label for="title">Album Name</label>
@@ -28,8 +28,15 @@
           <label for="genres">Genre</label>
           <input type="text" class="form-control" name="genres" id="genres" placeholder="Genres">
         </div>
-        <button type="submit" class="btn btn-default add-btn">Add album</button>
+        <div class="form-group">
+          <label for="releaseDate">ReleaseDate</label>
+          <input type="text" class="form-control" name="releaseDate" id="releaseDate" placeholder="releaseDate">
+        </div>
+        <div class="buttonDiv">
+         <button class= "addAlbum"type="submit">Add album</button>
+        </div>
       </form>
+
       <div class="panel panel-default">
         <div class="panel-heading shadows">ALBUMS</div>
         <div class="row">
