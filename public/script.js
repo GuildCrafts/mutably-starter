@@ -71,11 +71,11 @@ function catchEmAll () {
   }).done(function(data) {
     for (var i = 0; i < data.pokemon.length; i++) {
       $('.list-group').append('<li class="list-group-item item-'+data.pokemon[i]._id+'">'
-      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Nickname</button>'
-      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save</button>'
+      +'<button class="btn btn-primary edit-btn edit-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Nickname<i class="material-icons right">mode_edit</i></button>'
+      +'<button class="btn btn-success save-btn save-'+data.pokemon[i]._id+'" data-id="'+data.pokemon[i]._id+'">Save<i class="material-icons right">input</i></button>'
       +'<span class="name-'+data.pokemon[i]._id+'">&nbsp;'+data.pokemon[i].name+'&nbsp;'+data.pokemon[i].pokedex+'</span>'
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
-      +'<button class="btn btn-danger delete-btn right red" data-id="'+data.pokemon[i]._id+'">Release</button>'
+      +'<button class="btn btn-danger delete-btn right red" data-id="'+data.pokemon[i]._id+'">Release<i class="material-icons right">call_made</i></button>'
       +'</li>')
       $('.save-'+data.pokemon[i]._id).hide();
     }
