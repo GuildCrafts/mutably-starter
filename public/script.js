@@ -7,9 +7,12 @@ $(document).ready(function(){
 
   $('#new-pokemon-entry').on('submit', function(event) {
     event.preventDefault()
+    var url = "https://img.pokemondb.net/artwork/";
+    var pokeName = $("#image").val().toLowerCase()
+
+    $("#image").val(url + pokeName + ".jpg")
     var newPokeData = $(this).serialize()
     console.log("I did a thing");
-    console.log(newPokeData);
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
