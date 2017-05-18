@@ -2,6 +2,7 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
+
   // collect every pokemon we know
   catchEmAll();
 
@@ -77,8 +78,10 @@ function catchEmAll () {
       +'<span class="form-inline edit-form input-'+data.pokemon[i]._id+'">&nbsp;<input class="form-control" value="'+data.pokemon[i].name+'"/></span>'
       +'<button class="btn btn-danger delete-btn right red" data-id="'+data.pokemon[i]._id+'">Delete</button>'
       +'</li>')
-      $('.save-'+data.pokemon[i]._id).hide();
+      $('.save-'+data.pokemon[i]._id).hide()
+      $('.carousel').append('<a class="carousel-item"><img src="'+data.pokemon[i].image+'">'+'</a>')
     }
+    $('.carousel').carousel();
   })
 }
 
