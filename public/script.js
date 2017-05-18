@@ -8,9 +8,12 @@ $(document).ready(function(){
 
   $('#new-pokemon-entry').on('submit', function(event) {
     event.preventDefault()
+    var url = "https://img.pokemondb.net/artwork/";
+    var pokeName = $("#image").val().toLowerCase()
+
+    $("#image").val(url + pokeName + ".jpg")
     var newPokeData = $(this).serialize()
     console.log("I did a thing");
-    console.log(newPokeData);
     $(this).trigger("reset");
     $.ajax({
       method: 'POST',
@@ -103,7 +106,7 @@ function catchPokeDataResponse(data) {
   var id = data._id;
 
   // nickname the pokemon
-  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex)
+  $('.name-'+id).html('&nbsp;'+data.name+'&nbsp'+data.pokedex+'&nbsp'+data.evolves_from+'&nbsp'+data.image)
   $('.btn-danger').show()
   $('.name-'+id).show()
   $('.input-'+id).hide()
