@@ -4,11 +4,13 @@ $(document).ready(function(){
 
   // collect every pokemon we know
   catchEmAll();
+  document.getElementById("image").style.visibility = "hidden";
+
 
   $('#new-pokemon-entry').on('submit', function(event) {
     event.preventDefault()
     var url = "https://img.pokemondb.net/artwork/";
-    var pokeName = $("#image").val().toLowerCase()
+    var pokeName = $("#name").val().toLowerCase()
 
     $("#image").val(url + pokeName + ".jpg")
     var newPokeData = $(this).serialize()
