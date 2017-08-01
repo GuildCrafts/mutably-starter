@@ -6,33 +6,27 @@ $(document).ready(function(){
   getAllBooks(baseURL)
 
   $(document).on('click', '.view-btn', function() {
-    const bookId = $(this).closest('li').attr('id')
-    const selectedListItem = $(this).closest('li')
-
-    getOneBook(baseURL, bookId, selectedListItem)
+    $(this).parent().parent().next().toggleClass('hide-card')
   })
 
   $(document).on('click', '.close-btn', function() {
-    $(this).closest('div.card').remove()
+    $(this).parent().parent().toggleClass('hide-card');
   })
 });
 
-
-
-
+// Get data for all books
 const getAllBooks = (baseURL) => {
   $.ajax({
     url: `${baseURL}/books`,
     contentType: 'application/json',
-    success: function(response) {
-      createListElement(response.books)
-    },
-    error: (error) => {
-      console.error(error.message)
-    }
   })
+  .done(function(response) {
+    createListElement(response.books)
+  })
+  .catch(error => alert('Oh no! Something went wrong. Please try again.'))
 }
 
+// Create a new list element for each book
 const createListElement = (books) => {
   books.forEach(function(book) {
     $('.list-group').append(`
@@ -43,34 +37,16 @@ const createListElement = (books) => {
           <button type='button' class='btn btn-default delete-btn'>Delete</button>
         </div>
       </li>
-    `)
-  })
-}
-
-const getOneBook = (baseURL, bookId, selectedListItem) => {
-  $.ajax({
-    url: `${baseURL}/books/${bookId}`,
-    contentType: 'application/json',
-    success: function(book) {
-      viewBookDetails(book, selectedListItem)
-    },
-    error: function(error) {
-      console.error(error.message)
-    }
-  })
-}
-
-const viewBookDetails = (book, selectedListItem) => {
-  if (!selectedListItem.next().hasClass('card')) {
-    selectedListItem.after(`
-      <div class="card">
-      <img class="thumbnail" src=${book.image} alt="Card image cap" height='100%' width='120px'>
-      <div class="card-block">
-        <h2 class="card-title">${book.title}</h2>
-        <p class="card-text">Author: ${book.author}</p>
-        <p class="card-text">Release Date: ${book.releaseDate}</p>
-        <button class="btn btn-primary close-btn">Close</button>
+      <div class="card hide-card">
+        <img class="thumbnail" src=${book.image} alt="Card image cap" height='230px' width='160px'>
+        <div class="card-block">
+          <h2 class="card-title">${book.title}</h2>
+          <p class="card-text">Author: ${book.author}</p>
+          <p class="card-text">Release Date: ${book.releaseDate}</p>
+          <button class="btn btn-primary close-btn">Close</button>
       </div>
     `)
-  }
+  })
 }
+
+// Delete book entry from the page
