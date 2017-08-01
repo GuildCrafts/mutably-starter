@@ -61,14 +61,16 @@ const getOneBook = (baseURL, bookId, selectedListItem) => {
 }
 
 const viewBookDetails = (book, selectedListItem) => {
-  selectedListItem.after(`
-    <div class="card">
-    <img class="thumbnail" src=${book.image} alt="Card image cap" height='100%' width='120px'>
-    <div class="card-block">
-      <h2 class="card-title">${book.title}</h2>
-      <p class="card-text">Author: ${book.author}</p>
-      <p class="card-text">Release Date: ${book.releaseDate}</p>
-      <button class="btn btn-primary close-btn">Close</button>
-    </div>
-  `)
+  if (!selectedListItem.next().hasClass('card')) {
+    selectedListItem.after(`
+      <div class="card">
+      <img class="thumbnail" src=${book.image} alt="Card image cap" height='100%' width='120px'>
+      <div class="card-block">
+        <h2 class="card-title">${book.title}</h2>
+        <p class="card-text">Author: ${book.author}</p>
+        <p class="card-text">Release Date: ${book.releaseDate}</p>
+        <button class="btn btn-primary close-btn">Close</button>
+      </div>
+    `)
+  }
 }
