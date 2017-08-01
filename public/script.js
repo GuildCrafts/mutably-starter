@@ -6,16 +6,20 @@ $(document).ready(function(){
   getAllBooks(baseURL)
 
   $(document).on('click', '.view-btn', function() {
-    $(this).parent().parent().next().toggleClass('hide-card')
+    $(this).closest('li').next().toggleClass('hide-card')
   })
 
   $(document).on('click', '.close-btn', function() {
-    $(this).parent().parent().toggleClass('hide-card')
+    $(this).closest('div.card').toggleClass('hide-card')
   })
 
   $(document).on('click', '.delete-btn', function() {
-    const bookId = $(this).parent().parent().attr('id')
+    const bookId = $(this).closest('li').attr('id')
     deleteOneBook(baseURL, bookId)
+  })
+
+  $(document).on('click', '.edit-btn', function() {
+    $(this).closest('li').next().next().toggleClass('hide-card')
   })
 });
 
@@ -46,12 +50,49 @@ const createListElement = (books) => {
         </div>
       </li>
       <div class="card hide-card">
-        <img class="thumbnail" src=${book.image} alt="Card image cap" height='230px' width='160px'>
+        <div class='col-sm-4 image-holder'>
+          <img class="thumbnail" src=${book.image} alt="Card image cap" height='230px' width='160px'>
+        </div>
         <div class="card-block">
           <h2 class="card-title">${book.title}</h2>
           <p class="card-text">Author: ${book.author}</p>
           <p class="card-text">Release Date: ${book.releaseDate}</p>
           <button class="btn btn-primary close-btn">Close</button>
+        </div>
+      </div>
+      <div class='edit-card hide-card'>
+        <div class='row'>
+          <div class='col-sm-4 image-holder'>
+            <img class="thumbnail" src=${book.image} alt="Card image cap" height='230px' width='160px'>
+          </div>
+          <div class='col-sm-8'>
+            <h2>Edit book details</h2>
+            <form>
+              <div class='input-section'>
+                <label for="title" class="col-sm-4 col-form-label">Title</label>
+                <div class="form-input col-sm-8">
+                  <input type="text" class="form-control" id="title" value=${book.title}">
+                </div>
+               </div>
+              <div class='input-section'>
+                <label for="author" class="col-sm-4 col-form-label">Author</label>
+                <div class="form-input col-sm-8">
+                  <input type="text" class="form-control" id="author" value=${book.author}">
+                </div>
+               </div>
+              <div class='input-section'>
+                <label for="edit-date" class="col-sm-4 col-form-label">Release Date</label>
+                <div class="form-input col-sm-8">
+                  <input type="text" class="form-control" id="edit-date" value=${book.releaseDate}">
+                </div>
+              </div>
+              <div class='list-btns'>
+                <button type='submit' class='btn btn-primary form-btn'>Upload Image</button>
+                <button type='submit' class='btn btn-primary form-btn'>Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     `)
   })
