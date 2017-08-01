@@ -10,20 +10,28 @@ $(document).ready(function(){
   })
 
   $(document).on('click', '.close-btn', function() {
-    $(this).parent().parent().toggleClass('hide-card');
+    $(this).parent().parent().toggleClass('hide-card')
+  })
+
+  $(document).on('click', '.delete-btn', function() {
+    const bookId = $(this).parent().parent().attr('id')
+    deleteOneBook(baseURL, bookId)
   })
 });
 
 // Get data for all books
-const getAllBooks = (baseURL) => {
+const getAllBooks = (url) => {
   $.ajax({
-    url: `${baseURL}/books`,
+    url: `${url}/books`,
     contentType: 'application/json',
+    method: 'get'
   })
   .done(function(response) {
     createListElement(response.books)
   })
-  .catch(error => alert('Oh no! Something went wrong. Please try again.'))
+  .catch(error => {
+    alert('Oh no! Something went wrong. Please try again.')
+  })
 }
 
 // Create a new list element for each book
@@ -50,3 +58,24 @@ const createListElement = (books) => {
 }
 
 // Delete book entry from the page
+
+const deleteOneBook = (url, bookId) => {
+  $.ajax({
+    url: `${url}/books/${bookId}`,
+    contentType: 'application/json',
+    method: 'delete'
+  })
+  .done(function(response) {
+    removeBookElement(bookId)
+  })
+  .catch(error => {
+    console.error('Error: ', error)
+    alert('Oh no! Something when wrong. Please try again.')
+  })
+}
+
+const removeBookElement = (bookId) => {
+  $(`#${bookId}`).hide('slow', function() {
+    $(this).remove()
+  })
+}
