@@ -5,23 +5,34 @@ $(document).ready(function(){
   getAllBooks(baseURL)
 
   $(document).on('click', '.view-btn', function() {
-    $(this).closest('li').next().toggleClass('hide-card')
+    const bookId = $(this).closest('li').attr('id')
+    if ($('.show-card').length) {
+      $('.show-card').remove()
+    } else {
+      getOneBook('view', bookId)
+    }
   })
 
   $(document).on('click', '.close-btn', function() {
-    $(this).closest('div.edit-card').toggleClass('hide-card')
+    $(this).closest('div.show-card').remove()
+    console.log($(document).find('.show-card'));
   })
 
   $(document).on('click', '.delete-btn', function() {
     const bookId = $(this).closest('li').attr('id')
-    deleteOneBook(baseURL, bookId)
+    deleteOneBook(bookId)
   })
 
   $(document).on('click', '.edit-btn', function() {
-    $(this).closest('li').next().next().toggleClass('hide-card')
+    const bookId = $(this).closest('li').attr('id')
+    if ($('.edit-card').length) {
+      $('.edit-card').remove()
+    } else {
+      getOneBook('edit', bookId)
+    }
   })
 
-  $(document).on('click', '.submit-btn', function(event) {
+  $(document).on('click', '.submit-edit-btn', function(event) {
     event.preventDefault()
     const bookId = $(this).closest('div.edit-card').prev().prev().attr('id')
     const image = $(this).closest('div.edit-card').children().children('.image-holder').children().attr('src')
@@ -43,7 +54,7 @@ $(document).ready(function(){
   })
 })
 
-// Get data for all books
+// Grab all books from api
 const getAllBooks = () => {
   $.ajax({
     url: `${baseURL}/books`,
@@ -51,15 +62,31 @@ const getAllBooks = () => {
     method: 'get'
   })
   .done(function(response) {
-    createListElement(response.books)
+    createListElements(response.books)
   })
   .catch(error => {
     alert('Oh no! Something went wrong. Please try again.')
   })
 }
 
+// Grab one book from api
+const getOneBook = (btn, bookId) => {
+  $.ajax({
+    url: `${baseURL}/books/${bookId}`,
+    contentType: 'application/json',
+    method: 'get'
+  })
+  .done(function(book) {
+    if (btn === 'view') {
+      createViewBookCard(book)
+    } else {
+      createEditBookCard(book)
+    }
+  })
+}
+
 // Create a new list element for each book
-const createListElement = (books) => {
+const createListElements = (books) => {
   books.forEach(function(book) {
     $('.list-group').append(`
       <li class='list-group-item' id=${book._id}>${book.title}
@@ -69,61 +96,71 @@ const createListElement = (books) => {
           <button type='button' class='btn btn-default delete-btn'>Delete</button>
         </div>
       </li>
-      <div class='edit-card hide-card'>
-        <div class='row'>
-          <div class='col-sm-3 image-holder'>
-            <img class='thumbnail' src=${book.image} alt='Book Cover Image' height='230px' width='160px'>
-          </div>
-          <div class='col-sm-9'>
-            <div class=card-block>
-              <h2 class='card-title'>${book.title}</h2>
-              <p class='card-text'>Author: ${book.author}</p>
-              <p class='card-text'>Release Date: ${book.releaseDate}</p>
-              <button class='btn btn-primary close-btn'>Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class='edit-card hide-card'>
-        <div class='row'>
-          <div class='col-sm-3 image-holder'>
-            <img class='thumbnail' src=${book.image} alt='Card image cap' height='230px' width='160px'>
-          </div>
-          <div class='col-sm-9'>
-            <h2>Edit book details</h2>
-            <form class='edit-form'>
-              <div class='input-section'>
-                <label for='title' class='col-sm-3 col-form-label'>Title</label>
-                <div class='form-input col-sm-9'>
-                  <input type='text' class='form-control' id='title' value="${book.title}"'>
-                </div>
-               </div>
-              <div class='input-section'>
-                <label for='author' class='col-sm-3 col-form-label'>Author</label>
-                <div class='form-input col-sm-9'>
-                  <input type='text' class='form-control' id='author' value="${book.author}"'>
-                </div>
-               </div>
-              <div class='input-section'>
-                <label for='edit-date' class='col-sm-3 col-form-label'>Release Date</label>
-                <div class='form-input col-sm-9'>
-                  <input type='text' class='form-control' id='date' value="${book.releaseDate}"'>
-                </div>
-              </div>
-              <div class='edit-btns'>
-                <button type='submit' class='btn btn-primary form-btn upload-btn'>Upload Image</button>
-                <button type='submit' class='btn btn-primary form-btn submit-btn'>Submit</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     `)
   })
 }
+// Dynamically add a view card for the fetched book
+const createViewBookCard = (book) => {
+  $(document).find(`#${book._id}`).after(`
+    <div class='show-card'>
+      <div class='row'>
+        <div class='col-sm-3 image-holder'>
+          <img class='thumbnail' src=${book.image} alt='Book Cover Image' height='230px' width='160px'>
+        </div>
+        <div class='col-sm-9'>
+          <div class=card-block>
+            <h2 class='card-title'>${book.title}</h2>
+            <p class='card-text'>Author: ${book.author}</p>
+            <p class='card-text'>Release Date: ${book.releaseDate}</p>
+            <button class='btn btn-primary close-btn'>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `)
+}
+
+// Dynamically add an edit card for a fetched book
+const createEditBookCard = (book) => {
+  $(document).find(`#${book._id}`).after(`
+    <div class='edit-card'>
+      <div class='row'>
+        <div class='col-sm-3 image-holder'>
+          <img class='thumbnail' src=${book.image} alt='Card image cap' height='230px' width='160px'>
+        </div>
+        <div class='col-sm-9'>
+          <h2>Edit book details</h2>
+          <form class='edit-form'>
+            <div class='input-section'>
+              <label for='title' class='col-sm-3 col-form-label'>Title</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='title' value="${book.title}"'>
+              </div>
+             </div>
+            <div class='input-section'>
+              <label for='author' class='col-sm-3 col-form-label'>Author</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='author' value="${book.author}"'>
+              </div>
+             </div>
+            <div class='input-section'>
+              <label for='edit-date' class='col-sm-3 col-form-label'>Release Date</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='date' value="${book.releaseDate}"'>
+              </div>
+            </div>
+            <div class='edit-btns'>
+              <button type='submit' class='btn btn-primary form-btn upload-btn'>Upload Image</button>
+              <button type='submit' class='btn btn-primary form-btn submit-edit-btn'>Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `)
+}
 
 // Delete book entry from the page
-
 const deleteOneBook = (bookId) => {
   $.ajax({
     url: `${baseURL}/books/${bookId}`,
@@ -139,9 +176,10 @@ const deleteOneBook = (bookId) => {
   })
 }
 
+// TODO edge cases
 const removeBookElement = (bookId) => {
   $(`#${bookId}`).hide('slow', function() {
-    $(this).remove()
+    $(this).remove();
   })
 }
 
@@ -161,3 +199,53 @@ const editBookDetails = (bookId, updatedDetails) => {
     alert('Oh no! Something when wrong. Please try again.')
   })
 }
+
+//  <div class='edit-card hide-card'>
+//   <div class='row'>
+//     <div class='col-sm-3 image-holder'>
+//       <img class='thumbnail' src=${book.image} alt='Book Cover Image' height='230px' width='160px'>
+//     </div>
+//     <div class='col-sm-9'>
+//       <div class=card-block>
+//         <h2 class='card-title'>${book.title}</h2>
+//         <p class='card-text'>Author: ${book.author}</p>
+//         <p class='card-text'>Release Date: ${book.releaseDate}</p>
+//         <button class='btn btn-primary close-btn'>Close</button>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+// <div class='edit-card hide-card'>
+//   <div class='row'>
+//     <div class='col-sm-3 image-holder'>
+//       <img class='thumbnail' src=${book.image} alt='Card image cap' height='230px' width='160px'>
+//     </div>
+//     <div class='col-sm-9'>
+//       <h2>Edit book details</h2>
+//       <form class='edit-form'>
+//         <div class='input-section'>
+//           <label for='title' class='col-sm-3 col-form-label'>Title</label>
+//           <div class='form-input col-sm-9'>
+//             <input type='text' class='form-control' id='title' value="${book.title}"'>
+//           </div>
+//          </div>
+//         <div class='input-section'>
+//           <label for='author' class='col-sm-3 col-form-label'>Author</label>
+//           <div class='form-input col-sm-9'>
+//             <input type='text' class='form-control' id='author' value="${book.author}"'>
+//           </div>
+//          </div>
+//         <div class='input-section'>
+//           <label for='edit-date' class='col-sm-3 col-form-label'>Release Date</label>
+//           <div class='form-input col-sm-9'>
+//             <input type='text' class='form-control' id='date' value="${book.releaseDate}"'>
+//           </div>
+//         </div>
+//         <div class='edit-btns'>
+//           <button type='submit' class='btn btn-primary form-btn upload-btn'>Upload Image</button>
+//           <button type='submit' class='btn btn-primary form-btn submit-edit-btn'>Submit</button>
+//         </div>
+//       </form>
+//     </div>
+//   </div>
+// </div>
