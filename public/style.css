@@ -15,6 +15,7 @@
 .list-group-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .add-btn {
@@ -52,7 +53,7 @@
   height: 40px;
 }
 
-.image-holder {
+.image-box {
   display: flex;
   align-items: center;
   height: 250px;
@@ -73,6 +74,10 @@
 .modal-header {
   display: flex;
   flex-direction: row;
+}
+
+.list-title {
+  margin: 0;
 }
 
 h1 {
