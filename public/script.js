@@ -54,7 +54,7 @@ $(document).ready(function(){
 
   $(document).on('click', '.add-new-submit', function(event) {
     event.preventDefault()
-    const image = 'https://sequinsandcherryblossom.files.wordpress.com/2014/12/guest-cat-cover.jpg'
+    const image = $(this).parent().prev().find('input#image').val()
     const title = $(this).parent().prev().find('input#title').val()
     const author = $(this).parent().prev().find('input#author').val()
     const releaseDate = $(this).parent().prev().find('input#date').val()
