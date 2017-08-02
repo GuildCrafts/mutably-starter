@@ -21,23 +21,9 @@
   height: 40px;
 }
 
-.card {
-  display: flex;
-  flex-direction: row;
-  height: 250px;
-}
-
-.card-block {
-  margin-left: 1em;
-}
-
 .hide-card {
   display: none;
 }
-
-/*.edit-card {
-  height: 250px;
-}*/
 
 .col-form-label {
   padding: 0;
@@ -45,6 +31,18 @@
 
 .form-input {
   padding: 0;
+}
+
+.form-btn {
+  margin-top: 20px;
+}
+
+.edit-form {
+  width: 230px;
+}
+
+.edit-card {
+  margin-left: 1em;
 }
 
 .input-section {
@@ -64,13 +62,17 @@
   margin-bottom: 0;
 }
 
-.form-btn {
-  margin-top: 20px;
+.modal {
+  top: 100px;
 }
 
-form {
-  width: 230px;
-  padding-bottom: 15px;
+.modal-dialog {
+  width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
 }
 
 h1 {
