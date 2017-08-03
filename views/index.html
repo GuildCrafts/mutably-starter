@@ -1,23 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mutably front-end</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="/script.js"></script>
-  </head>
-  <body class="container">
-    <div class="col-sm-8 col-sm-offset-2">
-      <nav class="navbar navbar-default">
-        <a class="navbar-brand" href="/">Mutably Front-end</a>
-      </nav>
-      <div class="panel panel-default">
-        <div class="panel-heading">[Your Chosen Resource]</div>
+
+<head>
+  <title>Mutably front-end</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/script.js"></script>
+</head>
+
+<body class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <header class="page-header">
+        <h1>my little library</h1>
+        <button type="button" class="btn btn-default add-btn">Add new book</button>
+      </header>
+    </div>
+  </div>
+  <section class='book-grid'>
+    <div class="panel panel-default">
+      <div class="panel-heading">Books</div>
         <ul class="list-group">
-          <!-- your resource items here -->
         </ul>
       </div>
     </div>
-  </body>
+  </section>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Add new book</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class='add-form'>
+            <div class='input-section'>
+              <label for='title' class='col-sm-3 col-form-label'>Title</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='title'>
+              </div>
+             </div>
+            <div class='input-section'>
+              <label for='author' class='col-sm-3 col-form-label'>Author</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='author'>
+              </div>
+             </div>
+            <div class='input-section'>
+              <label for='edit-date' class='col-sm-3 col-form-label'>Release Date</label>
+              <div class='form-input col-sm-9'>
+                <input type='text' class='form-control' id='date'>
+              </div>
+            </div>
+            <div class='input-section'>
+              <input type='hidden' name='book-image' role='uploadcare-uploader' id='image'></input>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary add-new-submit">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    UPLOADCARE_LOCALE = 'en';
+    UPLOADCARE_LIVE = false;
+    UPLOADCARE_PUBLIC_KEY = "75131804ac7bd4e8c238";
+  </script>
+  <script charset="utf-8" src="//ucarecdn.com/libs/widget/3.1.1/uploadcare.full.min.js"></script>
+</body>
+
 </html>

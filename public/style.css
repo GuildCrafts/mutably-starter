@@ -1,1 +1,123 @@
 /*Custom styles here*/
+.pink {
+  background-color: pink;
+  border: 1px solid purple;
+  height: 250px;
+}
+
+html {
+  background-image: url('http://wallpapercave.com/wp/7ApilLw.jpg');
+}
+
+body {
+  font-family: Arial;
+
+}
+
+.row {
+  margin: 0;
+}
+
+.container {
+  box-shadow: -2px 4px 19px -2px rgba(0,0,0,0.35);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-btn {
+  height: 40px;
+}
+
+.show-card .edit-card {
+  background-color: #F5F5F5;
+  margin-left: 1em;
+}
+
+.col-form-label {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  padding: 0;
+}
+
+.form-btn {
+  margin-right: 10px;
+}
+
+.edit-form {
+  width: 230px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  height: 250px;
+}
+
+.thumbnail {
+  margin-bottom: 0;
+}
+
+.modal {
+  top: 100px;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.modal-body {
+  padding-bottom: 0;
+  padding-top: 10px;
+  height:200px;
+}
+
+.modal-dialog {
+  width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-title {
+  margin: 0;
+}
+
+.edit-btns {
+  display: flex;
+  align-items: center;
+  height: 58px;
+}
+
+h1 {
+  margin: 0;
+}
