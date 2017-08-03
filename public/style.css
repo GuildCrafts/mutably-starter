@@ -6,11 +6,16 @@
 }
 
 html {
-  background-color: #DFF8F3;
+  background-image: url('http://wallpapercave.com/wp/7ApilLw.jpg');
 }
 
 body {
   font-family: Arial;
+
+}
+
+.row {
+  margin: 0;
 }
 
 .container {
@@ -24,6 +29,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 20px;
 }
 
 .list-group-item {
@@ -36,8 +42,9 @@ body {
   height: 40px;
 }
 
-.hide-card {
-  display: none;
+.show-card .edit-card {
+  background-color: #F5F5F5;
+  margin-left: 1em;
 }
 
 .col-form-label {
@@ -51,15 +58,11 @@ body {
 }
 
 .form-btn {
-  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .edit-form {
   width: 230px;
-}
-
-.edit-card .show-card {
-  margin-left: 1em;
 }
 
 .input-section {
@@ -107,6 +110,12 @@ body {
 
 .list-title {
   margin: 0;
+}
+
+.edit-btns {
+  display: flex;
+  align-items: center;
+  height: 58px;
 }
 
 h1 {

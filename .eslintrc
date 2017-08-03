@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "func-names": ["error", "never"],
+    "semi": ["error", "never"],
+    "no-underscore-dangle": ["error", { "allow": ["foo_", "_bar"] }]
+  },
+  "env": {
+        "browser": true,
+        "node": true
+    }
+}
