@@ -4,6 +4,7 @@ button {
   border-style: outset;
   border-width: 3px;
   width: 5em;
+  margin: 1em;
 }
 
 li {
@@ -12,6 +13,10 @@ li {
 
 p {
   margin: 1em;
+}
+
+form {
+  padding: 2em;
 }
 
 .row {
