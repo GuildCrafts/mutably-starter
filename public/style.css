@@ -1,1 +1,42 @@
-/*Custom styles here*/
+button {
+  border-radius: 5px;
+  color: white;
+  border-style: outset;
+  border-width: 3px;
+  width: 5em;
+}
+
+li {
+  padding: 2em;
+}
+
+p {
+  margin: 1em;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.invisible {
+  display: none;
+}
+
+.editButton {
+  background-color: rgb(48, 121, 180);
+  border-color: rgb(48, 121, 180);
+  justify-content: flex-start;
+}
+
+.saveButton {
+  background-color: rgb(62, 158, 77);
+  border-color: rgb(62, 158, 77);
+  justify-content: flex-start;
+}
+
+.deleteButton {
+  background-color: rgb(244, 67, 54);
+  border-color: rgb(244, 67, 54);
+  justify-content: flex-end;
+}
