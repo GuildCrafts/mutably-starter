@@ -11,6 +11,18 @@ createBookRow = (title, author) => {
     </li>`)
 }
 
+const getStuff = $.ajax({
+  type: 'GET',
+  url: 'https://mutably.herokuapp.com/books',
+  success: (mutablyResponse) => {
+    for (i=0; i<mutablyResponse.books.length; i++){
+      createBookRow(mutablyResponse.books[i].title, mutablyResponse.books[i].author)
+    }
+  }
+})
+
+// createBookRow('The Cat in the Hat', "Dr. Seuss")
+
 $('button.editButton').on('click', () => {
   $('button.editButton').addClass('invisible')
   $('button.saveButton').removeClass('invisible')
@@ -27,20 +39,11 @@ $('button.editButton').on('click', () => {
 
 $()
 
-const testRun = $.getJSON('https://mutably.herokuapp.com/books')
-console.log('keys:', Object.keys(testRun))
-console.log('testRun:', testRun)
-
-const getStuff = $.ajax({
-  type: 'GET',
-  url: 'https://mutably.herokuapp.com/books',
-  success: (data) => {
-    console.log('success:', data.books[0].title)
-  }
-})
 
 
 
-createBookRow('The Cat in the Hat', "Dr. Seuss")
+
+
+
 
 });
