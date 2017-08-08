@@ -1,5 +1,16 @@
 $(document).ready(function(){
 
+createBookRow = (title, author) => {
+  $('.list-group').append(
+    `<li class="row">
+      <button class="editButton">Edit</button>
+      <button class="saveButton invisible">Save</button>
+      <p>` + title + `</p>
+      <p>` + author + `</p>
+      <button class="deleteButton">Delete</button>
+    </li>`)
+}
+
 $('button.editButton').on('click', () => {
   $('button.editButton').addClass('invisible')
   $('button.saveButton').removeClass('invisible')
@@ -28,7 +39,8 @@ const getStuff = $.ajax({
   }
 })
 
-// createBookRow = () => {
 
-}
+
+createBookRow('The Cat in the Hat', "Dr. Seuss")
+
 });
