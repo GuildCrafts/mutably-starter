@@ -3,11 +3,11 @@ $(document).ready(function(){
 createBookRow = (title, author) => {
   $('.list-group').append(
     `<li class="row">
-      <button class="editButton">Edit</button>
-      <button class="saveButton invisible">Save</button>
-      <p>` + title + `</p>
-      <p>` + author + `</p>
-      <button class="deleteButton">Delete</button>
+      <button class="editButton col-md-2">Edit</button>
+      <button class="saveButton col-md-2 invisible">Save</button>
+      <p class="col-md-4">` + title + `</p>
+      <p class="col-md-4">` + author + `</p>
+      <button class="deleteButton col-md-2">Delete</button>
     </li>`)
 }
 
