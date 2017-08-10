@@ -7,17 +7,41 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="/script.js"></script>
   </head>
+
   <body class="container">
     <div class="col-sm-8 col-sm-offset-2">
+
       <nav class="navbar navbar-default">
         <a class="navbar-brand" href="/">Mutably Front-end</a>
       </nav>
+
+      <!-- <div class="panel panel-default">
+        <div class="panel-heading">Search</div>
+        <form class="row" action='/' method='post'>
+          <p>Title:</p>
+          <input type='text' id='title'/>
+          <p>Author:</p>
+          <input type='text' id='author'/>
+          <button>search</button>
+        </form>
+      </div> -->
+
       <div class="panel panel-default">
-        <div class="panel-heading">[Your Chosen Resource]</div>
-        <ul class="list-group">
-          <!-- your resource items here -->
-        </ul>
+        <div class="panel-heading">Books!</div>
+        <ul class="list-group"></ul>
       </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading new-book-form">Add new book</div>
+        <form class="row newBook">
+          <p>Title:</p>
+          <input type='text' name='addTitle'/>
+          <p>Author:</p>
+          <input type='text' name='addAuthor'/>
+          <button class="addBook">Add</button>
+        </form>
+      </div>
+
     </div>
   </body>
 </html>
