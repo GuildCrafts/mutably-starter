@@ -1,14 +1,23 @@
 $(document).ready(function(){
 
-createBookRow = (title, author) => {
+createBookRow = (title, author, bookId) => {
   $('.list-group').append(
-    `<li class="row">
+    `<li class="row" data-book-id="${bookId}">
       <button class="editButton col-md-2">Edit</button>
       <button class="saveButton col-md-2 invisible">Save</button>
-      <p class="col-md-4">` + title + `</p>
-      <p class="col-md-4">` + author + `</p>
+      <p class="col-md-4">${title}</p>
+      <input class="col-md-4 invisible"  value="${title}"/>
+      <p class="col-md-4">${author}</p>
+      <input class="col-md-4 invisible"  value="${author}"/>
       <button class="deleteButton col-md-2">Delete</button>
     </li>`)
+}
+
+displayAllBooks = (mutablyResponse) => {
+  for (i=0; i<mutablyResponse.books.length; i++) {
+    const book = mutablyResponse.books[i]
+    createBookRow(book.title, book.author, book._id)
+  }
 }
 
 const showAllBooks = () => {
@@ -16,51 +25,57 @@ const showAllBooks = () => {
     type: 'GET',
     url: 'https://mutably.herokuapp.com/books',
     success: (mutablyResponse) => {
-      for (i=0; i<mutablyResponse.books.length; i++){
-        createBookRow(mutablyResponse.books[i].title, mutablyResponse.books[i].author)
-      }
+      displayAllBooks(mutablyResponse)
+      eventListeners()
     }
   })
 }
 
 showAllBooks()
 
-const addBook = (title, author) => {
+const addBook = (title, author, bookId) => {
   event.preventDefault()
   $.ajax({
     type: 'POST',
     url: 'https://mutably.herokuapp.com/books',
-    data: {title, author},
-    success: () => {
-      createBookRow(title, author)
-    }
+    data: {title, author, bookId},
+    success: createBookRow(title, author, bookId)
+  })
+}
+
+const deleteBook = (bookId) => {
+  $.ajax({
+    type: 'DELETE',
+    url: 'https://mutably.herokuapp.com/books/' + bookId,
+    success: $('li[data-book-id="'+bookId+'"]').remove()
   })
 }
 
 $('button.addBook').on('click', () => {
+  const newBookForm = $('.newBook').serializeArray()
 
-  addBook("I'm a book!", "someone")
-  const stuff = $('.new-book-form').serialize()
-  console.log(stuff)
+  const newBookTitle = newBookForm[0].value
+  const newBookAuthor = newBookForm[1].value
+
+  addBook(newBookTitle, newBookAuthor)
 })
 
+const eventListeners = () => {
+  $('.deleteButton').on('click', function () {
+    const bookId = $(this).parent().attr('data-book-id')
+    deleteBook(bookId)
+  })
 
-// createBookRow("geryfhiusdjk", "efhusdkj")
-// createBookRow("geryfhiusdjk", "efhusdkj")
-// createBookRow("geryfhiusdjk", "efhusdkj")
-//
-// $('button.editButton').on('click', () => {
-//   $('button.editButton').addClass('invisible')
-//   $('button.saveButton').removeClass('invisible')
-// })
-//
-// // for(i=0; i<$(button.saveButton).length i++){
-//   $('button.saveButton').on('click', () => {
-//     // $('button.saveButton').toggle()
-//     $('button.saveButton').addClass('invisible')
-//     $('button.editButton').removeClass('invisible')
-//     // console.log($('button.editButton')[0])
-//   })
-// // }
+  $('button.editButton, button.saveButton').on('click', () => {
+    $('button.editButton, button.saveButton').toggleClass('invisible')
+    $('p, input').toggleClass('invisible')
+  })
+
+}
+
+
+
+
+
 
 });
