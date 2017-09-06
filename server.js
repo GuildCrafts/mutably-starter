@@ -1,16 +1,17 @@
 const express = require('express')
+const path = require('path')
 const app = express()
-
-app.use(express.static('public'))
+const api = require('./controllers/index')
 
 // set 'html' as the engine, using ejs's renderFile function
-var ejs = require('ejs');
-app.engine('html', ejs.renderFile);
-app.set('view engine', 'html');
+var pug = require('pug');
 
-app.get('/', (request, response) => {
-  response.render('index')
-})
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'))
+app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static('public'))
+
+app.use('/', api)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

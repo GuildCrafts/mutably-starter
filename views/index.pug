@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .col-sm-8.col-sm-offset-2
+    nav.navbar.navbar-default
+      a.navbar-brand(href='/') Mutably Front-end For Fodé  and Gene
+    button.get-albums Get Albums
+    .panel.panel-default
+      .panel-heading [Your Chosen Resource]
+      ul.list-group
+        // your resource items here
+  script(src='https://code.jquery.com/jquery-3.2.1.js')
+  script(src='/script.js')
