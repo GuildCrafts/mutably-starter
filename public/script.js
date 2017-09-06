@@ -1,31 +1,69 @@
-console.log("Sanity Check: JS is working!");
+const url = 'http://mutably.herokuapp.com/albums'
 const getAlbums = document.querySelector('.get-albums')
 const listGroup = document.querySelector('.list-group')
-getAlbums.addEventListener("click", function(event){
-    // event.preventDefault()
-    getAllAlbums
+
+$(document).ready(function(){
+  getAllAlbums()
 });
 
-function getAllAlbums() {
-  // prevent.default()
-  alert("it works!")
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
+const checkStatus = response =>  {
+  if (response.status === 200) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(
+      new Error(response.statusText)
+    )
+  }
+}
 
-  fetch('http://mutably.herokuapp.com/albums', {
+const getJSON =  response => {
+    return response.json()
+}
+
+const getAllAlbums = () => {
+  fetch(url, {
     method: 'GET',
     mode: 'cors',
     headers: headers
-  }).then( albums => {
-    albums = albums.json()
-    return albums
-  }).then(albums => {
-  console.log(albums[0])
-  });
+    })
+    .then(checkStatus)
+    .then(getJSON)
+    .then( albums => console.log(albums) )
+    .catch(err => console.log(err) )
 }
 
-// $(document).ready(function(){
-//
-//
-//
+const addAlbum = () => {
+
+}
+
+const updateAlbum = id => {
+
+}
+
+const deleteAlbum = id => {
+
+}
+
+
+
+
+
+// getAlbums.addEventListener("click", function(event){
+//     // event.preventDefault()
+//     getAllAlbums
 // });
+//
+// function getAllAlbums() {
+//   // prevent.default()
+//   var music = []
+//   alert("it works!")
+//   const headers = new Headers();
+//   headers.append('Content-Type', 'application/json');
+//
+//   return fetch(url, {
+//     method: 'GET',
+//     mode: 'cors',
+//     headers: headers
+//   }).then( albums => albums.json())
+//     .then(albums => albums.albums)
+// }
