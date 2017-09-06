@@ -17,7 +17,7 @@ const checkStatus = response =>  {
 }
 
 const getJSON =  response => {
-    return response.json()
+  return response.json()
 }
 
 const getAllAlbums = () => {
@@ -43,27 +43,3 @@ const updateAlbum = id => {
 const deleteAlbum = id => {
 
 }
-
-
-
-
-
-// getAlbums.addEventListener("click", function(event){
-//     // event.preventDefault()
-//     getAllAlbums
-// });
-//
-// function getAllAlbums() {
-//   // prevent.default()
-//   var music = []
-//   alert("it works!")
-//   const headers = new Headers();
-//   headers.append('Content-Type', 'application/json');
-//
-//   return fetch(url, {
-//     method: 'GET',
-//     mode: 'cors',
-//     headers: headers
-//   }).then( albums => albums.json())
-//     .then(albums => albums.albums)
-// }
