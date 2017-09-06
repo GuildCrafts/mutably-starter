@@ -10,14 +10,18 @@ $(document).ready(function(){
   }).then(function(bookData){
     for (var i in bookData) {
     for (var j in bookData[i]){
-        console.log(bookData[i][j]);
+        // console.log(bookData[i][j]);
         listOfBooks.push(bookData[i][j].title + " " + "Author " + bookData[i][j].author)
     }
-    document.querySelector(".list-group").innerText = JSON.stringify(listOfBooks)
+    for (var i in listOfBooks) {
+    $('.list-group').append( '<li>' + listOfBooks[i] + '</li>' );
+}
+
+
 }
   console.log(listOfBooks)
 
-    
+
   })
 
 
