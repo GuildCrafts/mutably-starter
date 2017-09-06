@@ -3,6 +3,8 @@ const getAlbums = document.querySelector('.get-albums')
 const listGroup = document.querySelector('.list-group')
 
 $(document).ready(function(){
+
+  // Get All Albums On Load
   getAllAlbums()
 
   $(document).on('click', '.save-btn', function() {
@@ -46,7 +48,21 @@ const getAllAlbums = () => {
     .catch(err => console.log(err) )
 }
 
-const addAlbum = () => {
+const addAlbum = (id, artist, name, date, version, genres) => {
+  $.ajax({
+    url: url,
+    method: 'POST',
+    data: {
+      _id: id,
+      artistName: artist,
+      name: name,
+      releaseDate: date,
+      __v: version,
+      genres: genres
+    }
+  }).done( data => {
+    $(".class-name").append(data);
+  })
 
 }
 
