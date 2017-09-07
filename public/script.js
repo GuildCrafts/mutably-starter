@@ -3,8 +3,11 @@ console.log('Sanity Check: JS is working!');
 $(document).ready(function(){
 
   // code in here
+retriveBook()
+
   var listOfBooks = [];
 
+function retriveBook() {
   fetch("http://mutably.herokuapp.com/books").then(function(response){
     return response.json()
   }).then(function(bookData){
@@ -19,6 +22,7 @@ $(document).ready(function(){
   }
  }
 })
+}
 
 $('.panel-heading').empty()
 $('.panel-heading').append('<label for="fname">Enter Book</label> <input id="book" type="text" name="something" id="something" placeholder="Enter Book" />');
@@ -28,8 +32,10 @@ $('.panel-heading').append('<input class="addBooks" id="main" type="button" valu
 
 
 
-
 $('#main').click(function() {
+  let titleEntered = document.getElementById('book').value;
+  let authorEntered = document.getElementById('author').value;
+
 fetch('http://mutably.herokuapp.com/books', {
 	method: 'post',
   headers: {
@@ -37,12 +43,11 @@ fetch('http://mutably.herokuapp.com/books', {
     'Content-Type': 'application/json'
   },
 	body: JSON.stringify({
-		title: document.getElementById('book').value,
-		author: document.getElementById('author').value
+		title: titleEntered,
+		author: authorEntered
 	})
 }).then(response => response.json())
-  .then(response => console.log(response));
-
+  .then(response => $('.list-group').append( '<li>' +titleEntered + " " + "Author " + authorEntered  + '</li>' ));
 
 
 });
