@@ -47,9 +47,15 @@ fetch('http://mutably.herokuapp.com/books', {
 		author: authorEntered
 	})
 }).then(response => response.json())
-  .then(response => $('.list-group').append( '<li>' +titleEntered + " " + "Author " + authorEntered  + '</li>' ));
+  .then(response => $('.list-group').append( '<li>' +titleEntered + " " + "Author " + authorEntered  + '</li>' ))
+  .then(response => $(clearField()));
+  });
 
 
-});
+  function clearField() {
+    document.getElementById('book').value = "";
+    document.getElementById('author').value = "";
+  }
+
 
 });
