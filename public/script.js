@@ -17,7 +17,8 @@ $(document).ready(function(){
           span = DOMELEMENTS.createNode('span'),
           button = DOMELEMENTS.createNode('button');
       img.src = book.image;
-      span.innerHTML = `<br>${book.author}<br>${book.title}<br>${book.releaseDate}`
+      span.innerHTML = `<br>${book.author}<br>${book.title}<br>${book.releaseDate}`;
+      button.innerHTML = `Edit`
       DOMELEMENTS.append(li, img);
       DOMELEMENTS.append(li, span);
       DOMELEMENTS.append(li, button);
