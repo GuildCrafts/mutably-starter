@@ -4,6 +4,7 @@ $(document).ready(function(){
 
   const DOMELEMENTS = {
     rootURL: () => 'https://mutably.herokuapp.com/books',
+    urlWithID: () => `https://mutably.herokuapp.com/books/:${id}`,
     createNode: element => document.createElement(element),
     append: (parent, element) => parent.appendChild(element),
     ul: () => document.querySelector('.list-group'),
@@ -18,8 +19,7 @@ $(document).ready(function(){
           bookTitleLI = DOMELEMENTS.createNode('li'),
           releaseDateLI = DOMELEMENTS.createNode('li'),
           img = DOMELEMENTS.createNode('img'),
-          //span = DOMELEMENTS.createNode('span'),
-          button = DOMELEMENTS.createNode('button');
+          button = DOMELEMENTS.createNode('button')
       img.src = book.image;
       authorLI.innerHTML = `${book.author}`;
       bookTitleLI.innerHTML = `${book.title}`;
@@ -58,6 +58,9 @@ $(document).ready(function(){
                var inputTextValue = $(this).text();
                $(this).text('').append($('<input />',{'value' : inputTextValue}).val(inputTextValue));
            }
+           return {
+
+           }
        });
     }
   };
@@ -85,6 +88,19 @@ $(document).ready(function(){
           body: JSON.stringify(book)
         })
           .then(response => response.json())
+    },
+    updateBook: () => {
+      let editedBook = UI.updateBook()
+      return fetch(urlWithID, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: new Headers({
+        'Content-Type': 'application/json'
+        }),
+        credentials: 'same-origin',
+        body: JSON.stringify(editedBook)
+      })
+      .then(response => response.json())
     }
   };
 
@@ -102,8 +118,7 @@ $(document).ready(function(){
         UI.addNewBook(book)
       })
     },
-    // updateBook: () => {
-    //   //event.preventDefault();
+    // updateBook: function () {
     //   UI.updateBook();
     // }
   };
