@@ -1,57 +1,60 @@
 console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
-  const url = 'https://mutably.herokuapp.com/books';
-  const createNode = element => document.createElement(element);
-  const append = (parent, element) => parent.appendChild(element);
-  const ul = document.querySelector('.list-group');
-  const form = document.querySelector('form');
+
+  const DOMELEMENTS = {
+    rootURL: () => 'https://mutably.herokuapp.com/books',
+    createNode: element => document.createElement(element),
+    append: (parent, element) => parent.appendChild(element),
+    ul: () => document.querySelector('.list-group'),
+    form: () => document.querySelector('form')
+  };
 
   const UI = {
+    appendBook: (book) => {
+      let li = DOMELEMENTS.createNode('li'),
+          img = DOMELEMENTS.createNode('img'),
+          span = DOMELEMENTS.createNode('span');
+      img.src = book.image;
+      span.innerHTML = `<br>${book.author}<br>${book.title}<br>${book.releaseDate}`
+      DOMELEMENTS.append(li, img);
+      DOMELEMENTS.append(li, span);
+      DOMELEMENTS.append(DOMELEMENTS.ul(), li);
+    },
     addBooksToPage: (books) => {
-      console.log("books?", books);
       books.map(book => {
-        let li = createNode('li'),
-            img = createNode('img'),
-            span = createNode('span');
-        img.src = book.image;
-        span.innerHTML = `${book.author} ${book.title} ${book.releaseDate}`
-        append(li, img);
-        append(li, span);
-        append(ul, li);
+        UI.appendBook(book)
       })
     },
     addNewBook: (book) => {
-      console.log("BOOKS!!!!!",book);
       let newBook = book
-      let li = createNode('li'),
-          img = createNode('img'),
-          span = createNode('span');
-      img.src = newBook.image;
-      span.innerHTML = `${newBook.author} ${newBook.title} ${newBook.releaseDate}`
-      append(li, img);
-      append(li, span);
-      append(ul, li);
+      UI.appendBook(book)
     },
     extractBookFromForm: () => {
       return {
-        title: form.elements.booktitle.value,
-        author: form.elements.authorname.value,
-        image: form.elements.imagelink.value,
-        releaseDate: form.elements.releasedate.value
+        title: DOMELEMENTS.form().elements.booktitle.value,
+        author: DOMELEMENTS.form().elements.authorname.value,
+        image: DOMELEMENTS.form().elements.imagelink.value,
+        releaseDate: DOMELEMENTS.form().elements.releasedate.value
       }
     }
-  }
+  };
 
   const DATA = {
     fetchAllBooks: () => {
-      return fetch(url)
+      return fetch(DOMELEMENTS.rootURL(), {
+          method: 'GET',
+          mode: 'cors',
+        	headers: new Headers({
+      		'Content-Type': 'application/json'
+          })
+      })
         .then(response => response.json())
         .then(data => data.books)
     },
     createBook: () => {
       let book = UI.extractBookFromForm()
-      return fetch(url, {
+      return fetch(DOMELEMENTS.rootURL(), {
           method: 'POST',
           mode: 'cors',
         	headers: new Headers({
@@ -61,7 +64,7 @@ $(document).ready(function(){
         })
           .then(response => response.json())
     }
-  }
+  };
 
   const CONTROLLER = {
     fetchAllBooks: () => {
@@ -77,11 +80,8 @@ $(document).ready(function(){
         UI.addNewBook(book)
       })
     }
-  }
+  };
 
   CONTROLLER.fetchAllBooks()
-
-
-  form.addEventListener("submit", CONTROLLER.createBook)
-
+  DOMELEMENTS.form().addEventListener("submit", CONTROLLER.createBook)
 });
