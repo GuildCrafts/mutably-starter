@@ -7,22 +7,30 @@ $(document).ready(function(){
     createNode: element => document.createElement(element),
     append: (parent, element) => parent.appendChild(element),
     ul: () => document.querySelector('.list-group'),
-    form: () => document.querySelector('form')
+    form: () => document.querySelector('form'),
+    updateButton: () => document.querySelectorAll('button')
   };
 
   const UI = {
     appendBook: (book) => {
-      let li = DOMELEMENTS.createNode('li'),
+      let containerUL = DOMELEMENTS.createNode('ul'),
+          authorLI = DOMELEMENTS.createNode('li'),
+          bookTitleLI = DOMELEMENTS.createNode('li'),
+          releaseDateLI = DOMELEMENTS.createNode('li'),
           img = DOMELEMENTS.createNode('img'),
-          span = DOMELEMENTS.createNode('span'),
+          //span = DOMELEMENTS.createNode('span'),
           button = DOMELEMENTS.createNode('button');
       img.src = book.image;
-      span.innerHTML = `<br>${book.author}<br>${book.title}<br>${book.releaseDate}`;
+      authorLI.innerHTML = `${book.author}`;
+      bookTitleLI.innerHTML = `${book.title}`;
+      releaseDateLI.innerHTML = `${book.releaseDate}`;
       button.innerHTML = `Edit`
-      DOMELEMENTS.append(li, img);
-      DOMELEMENTS.append(li, span);
-      DOMELEMENTS.append(li, button);
-      DOMELEMENTS.append(DOMELEMENTS.ul(), li);
+      DOMELEMENTS.append(containerUL, img);
+      DOMELEMENTS.append(containerUL, authorLI);
+      DOMELEMENTS.append(containerUL, bookTitleLI)
+      DOMELEMENTS.append(containerUL, releaseDateLI);
+      DOMELEMENTS.append(containerUL, button);
+      DOMELEMENTS.append(DOMELEMENTS.ul(), containerUL);
     },
     addBooksToPage: (books) => {
       books.map(book => {
@@ -40,6 +48,17 @@ $(document).ready(function(){
         image: DOMELEMENTS.form().elements.imagelink.value,
         releaseDate: DOMELEMENTS.form().elements.releasedate.value
       }
+    },
+    updateBook: function () {
+      $(this).siblings().each(
+       function(){
+           if ($(this).find('input').length) {
+               $(this).text($(this).find('input').val());
+           } else {
+               var inputTextValue = $(this).text();
+               $(this).text('').append($('<input />',{'value' : inputTextValue}).val(inputTextValue));
+           }
+       });
     }
   };
 
@@ -82,9 +101,14 @@ $(document).ready(function(){
       .then(book => {
         UI.addNewBook(book)
       })
-    }
+    },
+    // updateBook: () => {
+    //   //event.preventDefault();
+    //   UI.updateBook();
+    // }
   };
 
-  CONTROLLER.fetchAllBooks()
-  DOMELEMENTS.form().addEventListener("submit", CONTROLLER.createBook)
+  CONTROLLER.fetchAllBooks();
+  DOMELEMENTS.form().addEventListener("submit", CONTROLLER.createBook);
+  $(DOMELEMENTS.ul()).on('click', 'button', UI.updateBook);
 });
