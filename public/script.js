@@ -14,11 +14,13 @@ $(document).ready(function(){
     appendBook: (book) => {
       let li = DOMELEMENTS.createNode('li'),
           img = DOMELEMENTS.createNode('img'),
-          span = DOMELEMENTS.createNode('span');
+          span = DOMELEMENTS.createNode('span'),
+          button = DOMELEMENTS.createNode('button');
       img.src = book.image;
       span.innerHTML = `<br>${book.author}<br>${book.title}<br>${book.releaseDate}`
       DOMELEMENTS.append(li, img);
       DOMELEMENTS.append(li, span);
+      DOMELEMENTS.append(li, button);
       DOMELEMENTS.append(DOMELEMENTS.ul(), li);
     },
     addBooksToPage: (books) => {
