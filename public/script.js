@@ -21,14 +21,25 @@ $(document).ready(function(){
         append(ul, li);
       })
     },
-    addNewBook: (books) => {
-      console.log("BOOKS!!!!!",books);
-      let newBook = books[books.length - 1]
+    addNewBook: (book) => {
+      console.log("BOOKS!!!!!",book);
+      let newBook = book
+      let li = createNode('li'),
+          img = createNode('img'),
+          span = createNode('span');
       img.src = newBook.image;
       span.innerHTML = `${newBook.author} ${newBook.title} ${newBook.releaseDate}`
       append(li, img);
       append(li, span);
       append(ul, li);
+    },
+    extractBookFromForm: () => {
+      return {
+        title: form.elements.booktitle.value,
+        author: form.elements.authorname.value,
+        image: form.elements.imagelink.value,
+        releaseDate: form.elements.releasedate.value
+      }
     }
   }
 
@@ -39,23 +50,16 @@ $(document).ready(function(){
         .then(data => data.books)
     },
     createBook: () => {
+      let book = UI.extractBookFromForm()
       return fetch(url, {
           method: 'POST',
           mode: 'cors',
         	headers: new Headers({
       		'Content-Type': 'application/json'
           }),
-          body: JSON.stringify({
-            title: form.elements.booktitle.value,
-            author: form.elements.authorname.value,
-            image: form.elements.imagelink.value,
-            releaseDate: form.elements.releasedate.value
-          })
+          body: JSON.stringify(book)
         })
           .then(response => response.json())
-          .then(data => {
-            console.log("what is this", data.books);
-          })
     }
   }
 
@@ -69,8 +73,8 @@ $(document).ready(function(){
     createBook: (event) => {
       event.preventDefault();
       DATA.createBook()
-      .then(books => {
-        UI.addNewBook(books)
+      .then(book => {
+        UI.addNewBook(book)
       })
     }
   }
