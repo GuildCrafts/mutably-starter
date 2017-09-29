@@ -26,8 +26,8 @@ $(document).ready(function(){
       releaseDateLI.innerHTML = `${book.releaseDate}`;
       button.innerHTML = `Edit`
       DOMELEMENTS.append(containerUL, img);
+      DOMELEMENTS.append(containerUL, bookTitleLI);
       DOMELEMENTS.append(containerUL, authorLI);
-      DOMELEMENTS.append(containerUL, bookTitleLI)
       DOMELEMENTS.append(containerUL, releaseDateLI);
       DOMELEMENTS.append(containerUL, button);
       DOMELEMENTS.append(DOMELEMENTS.ul(), containerUL);
@@ -38,7 +38,6 @@ $(document).ready(function(){
       })
     },
     addNewBook: (book) => {
-      let newBook = book
       UI.appendBook(book)
     },
     extractBookFromForm: () => {
