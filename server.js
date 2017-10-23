@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 const app = express();
 
 app.use(express.static('public'));
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
 // set 'html' as the engine, using ejs's renderFile function
 
