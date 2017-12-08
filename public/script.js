@@ -2,6 +2,9 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
-  // code in here
+  const add = fetch('/', {
+    method:'POST',
+    header: '',
+    body: JSON.stringify()// code in here
 
 });
