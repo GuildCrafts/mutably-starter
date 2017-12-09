@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
+const router = require('express').Router()
 
 
-const pokemon = require('../seed/pokemon.js')
+const pokemon = require('../../model/seed/pokemon.js')
 
 
-app.get('/pokemon/getAll', (request, response) => { //json.stringify express
+router.get('/pokemon/getAll', (request, response) => { //json.stringify express
   if(!req.body.pokemon) {
     return 'faiiiiil'
   } else {
@@ -13,10 +12,10 @@ app.get('/pokemon/getAll', (request, response) => { //json.stringify express
     res.json(JSON.stringify(pokemon));
   }
 })
- console.log(JSON.stringify(pokemon));
 
 
-app.delete('/pokemon/remove/:id',(request, response ) =>  {
+
+router.delete('/pokemon/remove/:id',(request, response ) =>  {
   const element = request.params.id
   if(!request.params.id) {
     return 'nonononono'
@@ -24,9 +23,15 @@ app.delete('/pokemon/remove/:id',(request, response ) =>  {
     res.setHeader('Content-Type', 'application/json')
     function remove (pokemon, element) {
     const index = pokemon.indexOf(element);
-    return pokemon.splice(index, 1);
+    return pokemon.splice(index, 1)
   }
-  res.json(JSON.stringify(element))
+res.setHeader('Content-Type', 'application/json')
+res.json(JSON.stringify(element))
+
+
+
 }
-console.log(JSON.stringify(element));
 })
+
+
+module.exports = router
